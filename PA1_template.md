@@ -1,9 +1,6 @@
 Reproducible Research: Peer Assessment 1
 ========================================================
 
-# Reproducible Research: Peer Assessment 1
-
-
 ## Loading and preprocessing the data
 
 Loading the csv file using `read.csv` method into a data.frame `activityData` and flagging text `"NA"` strings.  
@@ -83,9 +80,6 @@ Verifying the changes by checking the class of all columns using `str` method
 # changing the format of the date to proper date format
 activityData$date <- as.Date(activityData$date, format="%Y-%m-%d")
 
-# making intervals as factor
-activityData$interval <- factor(activityData$interval)
-
 # checking class of all data columns for verification of changes
 str(activityData)
 ```
@@ -94,7 +88,7 @@ str(activityData)
 ## 'data.frame':	17568 obs. of  3 variables:
 ##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
 ##  $ date    : Date, format: "2012-10-01" "2012-10-01" ...
-##  $ interval: Factor w/ 288 levels "0","5","10","15",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
 ```
 
 
@@ -257,10 +251,6 @@ maxSteps <- intervalMean[intervalMean$meanSteps == max(intervalMean$meanSteps),]
 # Plotting the time series plot
 dailyPatternPlot <- ggplot(intervalMean, aes(x = interval, y = meanSteps))
 dailyPatternPlot + geom_line(linetype=1) + labs(x ="5-minute Intervals") + labs(y="Average Number of Steps(across days)") + labs(title="Average daily activity pattern") + theme_bw() + geom_vline(xintercept = maxSteps$interval, color="red", linetype="longdash")
-```
-
-```
-## geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
 ```
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 
@@ -445,11 +435,6 @@ intervalMeanDayType <- ddply(weekImpActivityData, .(dayType, interval), summariz
 library(ggplot2)
 dayTypePlot <- ggplot(intervalMeanDayType, aes(interval, meanSteps))
 dayTypePlot + geom_line(alpha=1/2) + facet_wrap(~ dayType, ncol=1) + labs(x ="Interval") + labs(y="Average Number of Steps(across weekdays and weekends)") + labs(title="Differences in activity patterns between weekdays and weekends") + theme_bw()
-```
-
-```
-## geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
-## geom_path: Each group consist of only one observation. Do you need to adjust the group aesthetic?
 ```
 
 ![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16.png) 

@@ -1,9 +1,6 @@
 Reproducible Research: Peer Assessment 1
 ========================================================
 
-# Reproducible Research: Peer Assessment 1
-
-
 ## Loading and preprocessing the data
 
 Loading the csv file using `read.csv` method into a data.frame `activityData` and flagging text `"NA"` strings.  
@@ -40,9 +37,6 @@ Verifying the changes by checking the class of all columns using `str` method
 ```{r}
 # changing the format of the date to proper date format
 activityData$date <- as.Date(activityData$date, format="%Y-%m-%d")
-
-# making intervals as factor
-activityData$interval <- factor(activityData$interval)
 
 # checking class of all data columns for verification of changes
 str(activityData)
@@ -201,12 +195,12 @@ Do these values differ from the estimates from the first part of the assignment?
 mean(totalDaySteps$sumSteps)
 median(totalDaySteps$sumSteps)
 ```
+The new imputed values are same as initial part of the assignemnt as the data was imputed using the average values for each time interval.
 
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether 
-a given date is a weekday or weekend day.
+Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
 Creating a new data.frame for this plot `weekImpActivityData`  
 Logic for adding weekday and weekend factor levels
@@ -246,4 +240,9 @@ dayTypePlot + geom_line(alpha=1/2) + facet_wrap(~ dayType, ncol=1) + labs(x ="In
 ```
 
 The plots shows the differences in weekend and weekday activity.
+
+
+
+
+
 
